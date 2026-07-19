@@ -1,18 +1,18 @@
-#ifndef NOPANIC_H
-#define NOPANIC_H
-
 #include <stdio.h>
+#include <stdlib.h>
+#include <signal.h>
+#include <setjmp.h>
 
-static inline void suppress_catastrophe() {
-    fprintf(stderr, "[SYSTEM] Integrity breach detected, but Farland persists...\n");
+jmp_buf farland_recovery_point;
+
+void farland_signal_handler(int sig) {
+    fprintf(stderr, "\n[NOPANIC] Intercepted signal %d. Reality check: IGNORED. Suppressing meltdown...\n", sig);
+    
+    longjmp(farland_recovery_point, 1);
 }
 
-#define TRY_RECOVER(expression) \
-    do { \
-        if (!(expression)) { \
-            suppress_catastrophe(); \
-            /* no happened */ \
-        } \
-    } while (0)
-
-#endif
+void install_nopanic_handlers() {
+    signal(SIGSEGV, farland_signal_handler);
+    signal(SIGFPE, farland_signal_handler);
+    signal(SIGILL, farland_signal_handler);
+}
