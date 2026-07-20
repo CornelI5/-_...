@@ -305,11 +305,6 @@ void trigger_1024_breach(int1024_t overflowed_value)
     recalculate_level();
 }
 
-/*
- * trigger_reality_cascade: The GENERIC trigger.
- * Called by any module that causes a minor reality disturbance.
- * This is the "I did something slightly wrong" button.
- */
 void trigger_reality_cascade(void)
 {
     add_entropy(ENTROPY_PER_GENERIC_EVENT);
