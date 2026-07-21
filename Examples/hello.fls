@@ -1,0 +1,34 @@
+; --- Basic arithmetic (if the void allows it) ---
+
+    MOVI    R0, 100         ; R0 = 100
+    MOVI    R1, 200         ; R1 = 200
+    ADD     R2, R0, R1      ; R2 = R0 + R1 (maybe. maybe not.)
+
+; --- This is a destructive comment (SFC Rule 3) ---
+; --- The next line will be corrupted to 0xDEADBEEF ---
+
+---
+    MOVI    R3, 999         ; THIS LINE IS NOW A ZOMBIE
+
+; --- Loop example ---
+
+    MOVI    R4, 10          ; counter = 10
+
+loop:
+    MOVI    R5, 1           ; decrement value
+    SUB     R4, R4, R5      ; counter-- (DANGEROUS: may trigger paranoia)
+    JNZ     R4, loop        ; if counter != 0, jump to loop
+
+; --- Trigger some chaos ---
+
+    CASCADE                  ; entropy += 5
+    DRIFT                    ; drift_count++
+    DECAY                    ; decay_count++
+
+; --- The void instruction ---
+
+    VOID                     ; undefined behavior (contained)
+
+; --- Done (maybe) ---
+
+    HALT                     ; stop (5% chance: refused)
