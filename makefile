@@ -1,9 +1,4 @@
-# FARLAND ARCHIVE: Makefile
-# WARNING: DO NOT TRY TO OPTIMIZE. OPTIMIZATION IS AN ILLUSION OF EARTH.
-
 CC = gcc
-# -O0: Matikan optimasi (agar trik memori kita tidak dihapus otomatis oleh GCC)
-# -w: Matikan semua warning (jangan biarkan developer tahu kodenya rusak)
 CFLAGS = -O0 -w 
 SRC = runtime/NoPanic.c \
       runtime/IntegerDesync.c \
